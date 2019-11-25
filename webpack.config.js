@@ -3,10 +3,12 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: './src/js/index.js',
+  watch: true,
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
   },
+  
   module: {
       rules: [
         {
@@ -23,21 +25,29 @@ module.exports = {
             test: /\.(sa|sc|c)ss$/,
             use: [
                 {
-                    loader: MiniCssExtractPlugin.loader
+                  // Adds CSS to the DOM by injecting a `<style>` tag
+                  loader: 'style-loader'
                 },
                 {
-                    loader: "css-loader",
+                  // Interprets `@import` and `url()` like `import/require()` and will resolve them
+                  loader: 'css-loader'
                 },
                 {
-                    loader: "postcss-loader"
-                },
-                {
-                    loader: "sass-loader",
-                    options: {
-                        implementation: require("sass")
+                  // Loader for webpack to process CSS with PostCSS
+                  loader: 'postcss-loader',
+                  options: {
+                    plugins: function () {
+                      return [
+                        require('autoprefixer')
+                      ];
                     }
+                  }
+                },
+                {
+                  // Loads a SASS/SCSS file and compiles it to CSS
+                  loader: 'sass-loader'
                 }
-            ]
+              ]
         },
         {
             test: /\.(png|jkpe?g|gif|svg)$/,
