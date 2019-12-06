@@ -1,3 +1,33 @@
-h1  {
-    color: green;
+.main {
+    z-index: 0;
+    width: 100vw;
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    .form-wrapper {
+        z-index: 20;
+        background-color: white;
+        border-radius: 10px;
+        min-height: 300px;
+        width: 80%;
+    }
+}
+
+.white-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba($color: #fff, $alpha: .7);
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+}
+
+// Defaults
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
